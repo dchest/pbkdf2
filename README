@@ -9,9 +9,9 @@ with password helper functions removed)
 
 FUNCTIONS
 
-func PBKDF2(password []byte, salt []byte, iterations int, hash func() hash.Hash, outlen int) []byte
+func WithHMAC(hash func() hash.Hash, password []byte, salt []byte, iterations int, outlen int) []byte
 
-PBKDF2 derives key of length outlen from the provided password, salt,
+WithHMAC derives key of length outlen from the provided password, salt,
 and the number of iterations using PKCS#5 PBKDF2 with the provided
 hash function in HMAC.
 
@@ -38,7 +38,7 @@ EXAMPLE
 			panic("random reader failed")
 		}
 		// Derive key
-		key := pbkdf2.PBKDF2(password, salt, 9999, sha256.New, 64)
+		key := pbkdf2.WithHMAC(sha256.New, password, salt, 9999, 64)
 		fmt.Printf("%x", key)
 	}
 
