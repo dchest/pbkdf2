@@ -10,7 +10,7 @@ import (
 func tt(t *testing.T, p string, s string, h func()hash.Hash, i int, rl int, cres []byte) {
 	pp := []byte(p)
 	ss := []byte(s)
-	res := PBKDF2(pp, ss, i, h, rl)
+	res := WithHMAC(h, pp, ss, i, rl)
 	if !bytes.Equal(cres, res) {
 		t.Errorf("Invalid PBKDF2: expected %x, got %x", cres, res)
 	}
