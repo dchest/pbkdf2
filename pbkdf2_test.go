@@ -8,7 +8,6 @@ import (
 	"testing"
 )
 
-// Test vectors from RFC 6070, http://tools.ietf.org/html/rfc6070
 type testVector struct {
 	password string
 	salt     string
@@ -16,6 +15,7 @@ type testVector struct {
 	output   []byte
 }
 
+// Test vectors from RFC 6070, http://tools.ietf.org/html/rfc6070
 var sha1TestVectors = []testVector{
 	{
 		"password",
