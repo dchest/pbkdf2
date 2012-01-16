@@ -31,7 +31,7 @@ func WithHMAC(hash func() hash.Hash, password []byte, salt []byte, iterations in
 		hmac := hmac.New(hash, password)
 		hmac.Write(salt)
 		hmac.Write(ibuf)
-		tmp := hmac.Sum()
+		tmp := hmac.Sum(nil)
 		for i := 0; i < clen; i++ {
 			p[i] = tmp[i]
 		}
@@ -39,7 +39,7 @@ func WithHMAC(hash func() hash.Hash, password []byte, salt []byte, iterations in
 		for j := 1; j < iterations; j++ {
 			hmac.Reset()
 			hmac.Write(tmp)
-			tmp = hmac.Sum()
+			tmp = hmac.Sum(nil)
 			for k := 0; k < clen; k++ {
 				p[k] ^= tmp[k]
 			}
